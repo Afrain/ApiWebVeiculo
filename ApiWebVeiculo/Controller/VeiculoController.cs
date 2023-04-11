@@ -34,21 +34,21 @@ namespace ApiWebVeiculo.Controller
         public async Task<ActionResult<Veiculo>> SalvarVeiculo(Veiculo veiculo)
         {
             Veiculo veiculoSalvo = await _veiculoRepository.SalvarVeiculo(veiculo);
-            return Ok(veiculoSalvo);
+            return StatusCode(StatusCodes.Status201Created, veiculoSalvo);
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Veiculo>> AlterarVeiculo(Veiculo veiculo, int id)
         {
             Veiculo veiculoAlterado = await _veiculoRepository.AlterarVeiculo(veiculo, id);
-            return Ok(veiculoAlterado);
+            return StatusCode(StatusCodes.Status204NoContent, veiculoAlterado);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> ExcluirVeiculo(int id)
         {
             await _veiculoRepository.ExcluirVeiculo(id);
-            return true;
+            return NoContent();
         }
     }
 }
