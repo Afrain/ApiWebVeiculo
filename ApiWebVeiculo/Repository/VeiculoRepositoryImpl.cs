@@ -35,14 +35,13 @@ namespace ApiWebVeiculo.Repository
         {
             var veiculoBuscado = await BuscarVeiculoId(id);
 
-            veiculoBuscado.Id = id;
             veiculoBuscado.Nome = veiculo.Nome;
             veiculoBuscado.Marca = veiculo.Marca;
             veiculoBuscado.Ano = veiculo.Ano;
             veiculo.Preco = veiculo.Preco;
             veiculo.Cor = veiculo.Cor;
 
-            await _dbContext.Veiculos.AddAsync(veiculoBuscado);
+            _dbContext.Veiculos.Update(veiculoBuscado);
             await _dbContext.SaveChangesAsync();
 
             return veiculo;
