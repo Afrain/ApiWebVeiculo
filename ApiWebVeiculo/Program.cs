@@ -1,3 +1,8 @@
+using ApiWebVeiculo.Data;
+using ApiWebVeiculo.Repository;
+using ApiWebVeiculo.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
+
 namespace ApiWebVeiculo
 {
     public class Program
@@ -12,6 +17,14 @@ namespace ApiWebVeiculo
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            //Configuração do EntityFrameworkSqlServer
+            builder.Services.AddEntityFrameworkSqlServer().AddDbContext<VeiculoDBContext>(
+                    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
+                );
+
+            //Adicionando as dependencias do repository
+            builder.Services.AddScoped<IVeiculoRepository, VeiculoRepositoryImpl>();
 
             var app = builder.Build();
 
