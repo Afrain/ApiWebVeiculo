@@ -7,7 +7,7 @@ namespace ApiWebVeiculo.Repository.Interface
         Task<List<Veiculo>> BuscarTodosVeiculos();
         Task<Veiculo> BuscarVeiculoId(int id);
         Task<Veiculo> SalvarVeiculo(Veiculo veiculo);
-        Task<Veiculo> AlterarVeiculo(Veiculo veiculo);
+        Task<Veiculo> AlterarVeiculo(Veiculo veiculo, int id);
         Task<bool> ExcluirVeiculo(int id);
     }
 }
