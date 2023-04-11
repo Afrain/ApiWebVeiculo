@@ -1,4 +1,5 @@
-﻿using ApiWebVeiculo.Models;
+﻿using ApiWebVeiculo.Data.Map;
+using ApiWebVeiculo.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiWebVeiculo.Data
@@ -11,6 +12,7 @@ namespace ApiWebVeiculo.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new VeiculoMap());
             base.OnModelCreating(modelBuilder);
         }
     }
