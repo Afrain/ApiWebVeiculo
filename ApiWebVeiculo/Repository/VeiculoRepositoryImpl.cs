@@ -1,8 +1,8 @@
 ﻿using ApiWebVeiculo.Data;
 using ApiWebVeiculo.Models;
 using ApiWebVeiculo.Repository.Interface;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ApiWebVeiculo.Exceptions;
 
 namespace ApiWebVeiculo.Repository
 {
@@ -21,7 +21,10 @@ namespace ApiWebVeiculo.Repository
 
         public async Task<Veiculo> BuscarVeiculoId(int id)
         {
-            return await _dbContext.Veiculos.FirstOrDefaultAsync(veiculo => veiculo.Id == id);
+            var veiculoBuscado = await _dbContext.Veiculos.FirstOrDefaultAsync(veiculo => veiculo.Id == id);
+            return veiculoBuscado == null 
+                ? throw new NotFoundException("Veiculo não encontrado!") 
+                : veiculoBuscado;
         }
 
         public async Task<Veiculo> SalvarVeiculo(Veiculo veiculo)

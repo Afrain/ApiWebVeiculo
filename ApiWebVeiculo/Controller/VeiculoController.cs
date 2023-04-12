@@ -1,6 +1,5 @@
 ﻿using ApiWebVeiculo.Models;
 using ApiWebVeiculo.Repository.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiWebVeiculo.Controller

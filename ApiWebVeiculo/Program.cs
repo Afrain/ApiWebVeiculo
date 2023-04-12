@@ -1,4 +1,5 @@
 using ApiWebVeiculo.Data;
+using ApiWebVeiculo.Middlewares;
 using ApiWebVeiculo.Repository;
 using ApiWebVeiculo.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,8 @@ namespace ApiWebVeiculo
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 
             app.UseHttpsRedirection();
 
