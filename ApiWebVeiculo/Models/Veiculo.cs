@@ -1,4 +1,6 @@
-﻿namespace ApiWebVeiculo.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ApiWebVeiculo.Models
 {
     public class Veiculo
     {

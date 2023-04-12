@@ -1,4 +1,5 @@
 ﻿using ApiWebVeiculo.Models;
+using ApiWebVeiculo.Models.Dtos;
 using ApiWebVeiculo.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,15 +31,17 @@ namespace ApiWebVeiculo.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult<Veiculo>> SalvarVeiculo(Veiculo veiculo)
+        public async Task<ActionResult<Veiculo>> SalvarVeiculo(VeiculoRequestDTO veiculoRequestDTO)
         {
+            var veiculo = DtoToObjeto(veiculoRequestDTO);
             Veiculo veiculoSalvo = await _veiculoRepository.SalvarVeiculo(veiculo);
             return StatusCode(StatusCodes.Status201Created, veiculoSalvo);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Veiculo>> AlterarVeiculo(Veiculo veiculo, int id)
+        public async Task<ActionResult<Veiculo>> AlterarVeiculo(VeiculoRequestDTO veiculoRequestDTO, int id)
         {
+            var veiculo = DtoToObjeto(veiculoRequestDTO);
             Veiculo veiculoAlterado = await _veiculoRepository.AlterarVeiculo(veiculo, id);
             return StatusCode(StatusCodes.Status204NoContent, veiculoAlterado);
         }
@@ -48,6 +51,17 @@ namespace ApiWebVeiculo.Controller
         {
             await _veiculoRepository.ExcluirVeiculo(id);
             return NoContent();
+        }
+        private static Veiculo DtoToObjeto(VeiculoRequestDTO veiculoRequestDTO)
+        {
+            return new Veiculo
+            {
+                Nome = veiculoRequestDTO.Nome,
+                Marca = veiculoRequestDTO.Marca,
+                Ano = veiculoRequestDTO.Ano,
+                Preco = veiculoRequestDTO.Preco,
+                Cor = veiculoRequestDTO.Cor
+            };
         }
     }
 }
